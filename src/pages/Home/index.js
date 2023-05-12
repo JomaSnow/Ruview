@@ -1,20 +1,18 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Display from "./Display";
-import { getMeals } from "../../api/functions/getMeals";
+import { getAllMeals } from "../../api/functions/meals";
 
 export default function HomePage() {
   const [meals, setMeals] = useState([]);
 
-  const getMealsCallback = useCallback(async () => {
-    const meals = await getMeals();
+  const getAllMealsCallback = useCallback(async () => {
+    const meals = await getAllMeals();
     setMeals(meals);
   }, []);
 
   useEffect(() => {
-    getMealsCallback().catch(console.error);
-  }, [getMealsCallback]);
+    getAllMealsCallback().catch(console.error());
+  }, [getAllMealsCallback]);
 
-  console.log(meals);
-
-  return <Display />;
+  return <Display meals={meals} />;
 }

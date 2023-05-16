@@ -15,7 +15,7 @@ export default function Display({
   errorMessage,
 }) {
   return (
-    <Main>
+    <Main center>
       <LoginArea>
         <PageTitle>Admin Login</PageTitle>
         <Form>
@@ -31,7 +31,7 @@ export default function Display({
             value={password}
             setValue={setPassword}
           />
-          <Row>
+          <Row padding="0 10% 0 0">
             <Button
               type="submit"
               text="Entrar"

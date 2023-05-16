@@ -1,4 +1,4 @@
-import { db } from "../database-test-config";
+import { db, storage } from "../database-test-config";
 import {
   collection,
   doc,
@@ -8,6 +8,7 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
+import { ref, uploadBytes, getBytes } from "firebase/storage";
 
 const MEALS_PATH = "meals";
 const mealsCollection = collection(db, MEALS_PATH);
@@ -18,8 +19,17 @@ export const getAllMeals = async () => {
 
   await getDocs(mealsCollection)
     .then((res) => {
-      res.docs.map((doc) => {
-        return meals.push(doc.data());
+      res.docs.map(async (doc) => {
+        let meal = doc.data();
+        let image = undefined;
+        await getBytes(ref(storage, MEALS_PATH + `/${doc.id}`))
+          .then()
+          .catch((err) => {
+            return `Ocorreu um erro ao recuperar a imagem. (${err.code})`;
+          });
+
+        meal = { ...meal, id: doc.id, image };
+        return meals.push(meal);
       });
     })
     .catch((e) => {
@@ -47,19 +57,27 @@ export const getMeal = async (id) => {
 };
 
 // cadastra uma nova refeição
-export const createMeal = async (newMeal) => {
+export const createMeal = async (newMeal, image) => {
   let createdMealId = undefined;
 
   await addDoc(mealsCollection, newMeal)
-    .then((res) => {
+    .then(async (res) => {
       createdMealId = res.id;
+      console.log(createdMealId);
+      await uploadBytes(
+        ref(storage, MEALS_PATH + `/${createdMealId}`),
+        image
+      ).catch((e) => {
+        console.error(e.code);
+        return `Ocorreu um erro no upload de imagem. (${e.code})`;
+      });
     })
     .catch((e) => {
       console.error(e.code);
       return `Ocorreu um erro. (${e.code})`;
     });
 
-  return createdMealId;
+  return true;
 };
 
 // atualiza uma refeição

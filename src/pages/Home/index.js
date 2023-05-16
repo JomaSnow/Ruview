@@ -8,6 +8,7 @@ export default function HomePage() {
   const getAllMealsCallback = useCallback(async () => {
     const meals = await getAllMeals();
     setMeals(meals);
+    console.log(meals);
   }, []);
 
   useEffect(() => {

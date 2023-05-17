@@ -15,7 +15,7 @@ export default function Display({
   errorMessage,
 }) {
   return (
-    <Main center>
+    <Main $center>
       <LoginArea>
         <PageTitle>Admin Login</PageTitle>
         <Form>

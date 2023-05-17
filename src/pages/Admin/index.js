@@ -3,6 +3,7 @@ import Display from "./LoginForm";
 import { ADMIN_SESSION_KEY, logIn, logOut } from "../../api/functions/auth";
 import Dashboard from "./Dashboard";
 import { createMeal } from "../../api/functions/meals";
+import { getAllMeals } from "../../api/functions/meals";
 
 export default function AdminPage() {
   const [loading, setLoading] = useState(false);
@@ -26,6 +27,9 @@ export default function AdminPage() {
   const [trigo, setTrigo] = useState(false);
   const [image, setImage] = useState(null);
 
+  const [meals, setMeals] = useState([]);
+  const [loadingMeals, setLoadingMeals] = useState(true);
+
   const mealTypeOptions = [
     { value: 0, text: "CAFÉ", default: false },
     { value: 1, text: "ALMOÇO", default: false },
@@ -35,6 +39,13 @@ export default function AdminPage() {
     { value: 0, text: "REFEITÓRIO", default: false },
     { value: 1, text: "EXECUTIVO", default: false },
   ];
+
+  useEffect(() => {
+    getAllMeals().then((response) => {
+      setMeals(response);
+      setLoadingMeals(false);
+    });
+  }, []);
 
   useEffect(() => {
     const user = sessionStorage.getItem(ADMIN_SESSION_KEY);
@@ -116,6 +127,10 @@ export default function AdminPage() {
 
   return isLoggedIn ? (
     <Dashboard
+      meals={meals}
+      setMeals={setMeals}
+      loadingMeals={loadingMeals}
+      setLoadingMeals={setLoadingMeals}
       handleLogOut={handleLogout}
       handleAddMeal={handleAddMeal}
       loading={loading}

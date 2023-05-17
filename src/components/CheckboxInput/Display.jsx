@@ -13,6 +13,7 @@ export default function Display({ label, value, setValue = () => {} }) {
   return (
     <Wrapper>
       <Input
+        id={label}
         ref={inputRef}
         type="checkbox"
         value={value}
@@ -20,7 +21,7 @@ export default function Display({ label, value, setValue = () => {} }) {
           setValue(!value);
         }}
       />
-      <Text htmlFor={inputRef}>{label}</Text>
+      <Text htmlFor={label}>{label}</Text>
     </Wrapper>
   );
 }

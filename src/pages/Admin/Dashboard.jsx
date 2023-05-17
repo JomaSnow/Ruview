@@ -1,5 +1,12 @@
 import React from "react";
-import { Main, NewMealArea, SectionTitle, Row, ErrorMessage } from "./styles";
+import {
+  Main,
+  NewMealArea,
+  SectionTitle,
+  Row,
+  ErrorMessage,
+  MealsArea,
+} from "./styles";
 import Button from "../../components/Button";
 import CheckboxInput from "../../components/CheckboxInput";
 import TextInput from "../../components/TextInput";
@@ -7,6 +14,7 @@ import { colors } from "../../util/design";
 import { ClipLoader } from "react-spinners";
 import SelectInput from "../../components/SelectInput";
 import ImageInput from "../../components/ImageInput";
+import MealCard from "../../components/MealCard";
 
 export default function Dashboard({
   handleLogOut = () => {},
@@ -41,10 +49,11 @@ export default function Dashboard({
   setTrigo,
   image,
   setImage,
+  meals = [],
+  loadingMeals,
 }) {
   return (
     <Main>
-      <Button text="Sair" onClick={handleLogOut} />
       <Row>
         <NewMealArea>
           <SectionTitle>Cadastrar Nova Refeição</SectionTitle>
@@ -103,7 +112,16 @@ export default function Dashboard({
             {loading && <ClipLoader color={colors.accent} />}
           </Row>
         </NewMealArea>
-        <NewMealArea></NewMealArea>
+        <NewMealArea>
+          <SectionTitle>Refeições Cadastradas</SectionTitle>
+          <MealsArea>
+            {loadingMeals && <ClipLoader color={colors.accent} />}
+            {!loadingMeals &&
+              meals.map((m) => {
+                return <MealCard key={m.id} meal={m} />;
+              })}
+          </MealsArea>
+        </NewMealArea>
       </Row>
     </Main>
   );

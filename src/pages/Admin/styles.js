@@ -6,6 +6,7 @@ export const PageTitle = styled.h1`
   color: ${colors.secondary};
 `;
 export const SectionTitle = styled.h2`
+  margin-bottom: 0.6rem;
   font-size: 1.5rem;
   color: ${colors.secondary};
 `;
@@ -17,7 +18,7 @@ export const Main = styled.main`
   width: 100%;
   height: 100vh;
   flex-direction: column;
-  justify-content: ${(props) => (props.center ? "center" : "flex-start")};
+  justify-content: ${(props) => (props.$center ? "center" : "flex-start")};
   align-items: center;
   background-color: ${colors.primary};
 `;
@@ -26,16 +27,28 @@ export const NewMealArea = styled.section`
   display: flex;
   position: relative;
   flex: 1;
-  min-height: 100px;
-  max-height: 80vh;
+  height: 750px;
   overflow-y: auto;
   background-color: ${colors.off_white};
   box-shadow: 2px 2px 4px 1px ${colors.shadow};
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   margin: 4px;
   padding: 12px;
+`;
+
+export const MealsArea = styled.div`
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: ${colors.off_white};
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 2px;
 `;
 
 export const LoginArea = styled.section`

@@ -4,7 +4,7 @@ export const colors = {
   accent: "#F28500",
   black: "#534439",
   white: "#FEFEFE",
-  off_white: "#F3F3F3",
+  off_white: "#EDEEED",
   shadow: "#666666",
   secondary_lighter: "#00BD5E",
 };

@@ -16,7 +16,8 @@ export default function Display({ value, setValue = () => {} }) {
         <div>
           <img
             alt="not found"
-            width={"250px"}
+            width="200px"
+            height="200px"
             src={URL.createObjectURL(value)}
           />
           <br />

@@ -8,7 +8,7 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
-import { ref, uploadBytes, getBytes } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const MEALS_PATH = "meals";
 const mealsCollection = collection(db, MEALS_PATH);
@@ -22,13 +22,16 @@ export const getAllMeals = async () => {
       res.docs.map(async (doc) => {
         let meal = doc.data();
         let image = undefined;
-        await getBytes(ref(storage, MEALS_PATH + `/${doc.id}`))
-          .then()
+        await getDownloadURL(ref(storage, MEALS_PATH + `/${doc.id}`))
+          .then((result) => {
+            image = result;
+          })
           .catch((err) => {
-            return `Ocorreu um erro ao recuperar a imagem. (${err.code})`;
+            console.error(err.code);
           });
 
         meal = { ...meal, id: doc.id, image };
+        // meal = { ...meal, id: doc.id };
         return meals.push(meal);
       });
     })

@@ -5,6 +5,7 @@ export const PageTitle = styled.h1`
   font-size: 2rem;
   color: ${colors.secondary};
 `;
+
 export const SectionTitle = styled.h2`
   margin-bottom: 0.6rem;
   font-size: 1.5rem;
@@ -16,6 +17,7 @@ export const Main = styled.main`
   position: relative;
   padding: 2rem 4rem;
   width: 100%;
+  min-height: 100vh;
   flex-direction: column;
   justify-content: ${(props) => (props.$center ? "center" : "flex-start")};
   align-items: center;

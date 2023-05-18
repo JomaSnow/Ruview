@@ -16,7 +16,6 @@ export const Main = styled.main`
   position: relative;
   padding: 2rem 4rem;
   width: 100%;
-  height: 100vh;
   flex-direction: column;
   justify-content: ${(props) => (props.$center ? "center" : "flex-start")};
   align-items: center;

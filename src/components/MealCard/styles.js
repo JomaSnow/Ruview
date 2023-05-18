@@ -45,6 +45,7 @@ export const Image = styled.img`
   position: relative;
   object-fit: fill;
   height: 150px;
+  width: 180px;
 `;
 
 export const InfoArea = styled.div`

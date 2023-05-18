@@ -15,6 +15,7 @@ import { ClipLoader } from "react-spinners";
 import SelectInput from "../../components/SelectInput";
 import ImageInput from "../../components/ImageInput";
 import MealCard from "../../components/MealCard";
+import CardapioForm from "../../components/CardapioForm";
 
 export default function Dashboard({
   handleLogOut = () => {},
@@ -54,6 +55,9 @@ export default function Dashboard({
 }) {
   return (
     <Main>
+      <Row>
+        <CardapioForm meals={meals} />
+      </Row>
       <Row>
         <NewMealArea>
           <SectionTitle>Cadastrar Nova Refeição</SectionTitle>

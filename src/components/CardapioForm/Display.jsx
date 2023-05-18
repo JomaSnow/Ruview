@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   CalendarioArea,
   CardapioSection,
@@ -20,9 +20,14 @@ export default function Display({
   setSelectedRestaurant,
   restaurantOptions,
 
+  updatedAt,
+
   cafeOptions,
   almocoOptions,
   jantaOptions,
+
+  loading,
+  handleUpdate = () => {},
 
   segundaCafe,
   setSegundaCafe,
@@ -73,12 +78,6 @@ export default function Display({
   domingoJanta,
   setDomingoJanta,
 }) {
-  useEffect(() => {
-    // console.log(cafeOptions);
-    // console.log(almocoOptions);
-    // console.log(jantaOptions);
-  }, [cafeOptions, almocoOptions, jantaOptions]);
-
   return (
     <CardapioSection>
       <HeaderArea>
@@ -342,11 +341,13 @@ export default function Display({
       )}
 
       <InfoAndButtonArea>
-        <InfoText>Atualizado por último em: xx/xx/xxxx xx:xx</InfoText>
+        {selectedRestaurant != -1 && (
+          <InfoText>Atualizado por último em: {updatedAt}</InfoText>
+        )}
         <Button
-          disabled={selectedRestaurant == -1}
+          disabled={selectedRestaurant == -1 || loading}
           text="Atualizar Cardápio"
-          onClick={() => {}}
+          onClick={handleUpdate}
         />
       </InfoAndButtonArea>
     </CardapioSection>

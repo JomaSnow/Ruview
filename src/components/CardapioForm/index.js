@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Display from "./Display";
+import {
+  getExecutivo,
+  getRefeitorio,
+  updateCardapio,
+} from "../../api/functions/cardapio";
 
 export default function CardapioForm({ meals = [] }) {
   const [selectedRestaurant, setSelectedRestaurant] = useState(-1);
@@ -36,10 +41,103 @@ export default function CardapioForm({ meals = [] }) {
   const [almocoOptions, setAlmocoOptions] = useState([]);
   const [jantaOptions, setJantaOptions] = useState([]);
 
+  const [updatedAt, setUpdatedAt] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [cardapioRefeitorio, setCardapioRefeitorio] = useState({
+    domingo_cafe: -1,
+    domingo_almoco: -1,
+    domingo_janta: -1,
+    segunda_cafe: -1,
+    segunda_almoco: -1,
+    segunda_janta: -1,
+    terca_cafe: -1,
+    terca_almoco: -1,
+    terca_janta: -1,
+    quarta_cafe: -1,
+    quarta_almoco: -1,
+    quarta_janta: -1,
+    quinta_cafe: -1,
+    quinta_almoco: -1,
+    quinta_janta: -1,
+    sexta_cafe: -1,
+    sexta_almoco: -1,
+    sexta_janta: -1,
+    sabado_cafe: -1,
+    sabado_almoco: -1,
+    sabado_janta: -1,
+    updated_at: 0,
+  });
+  const [cardapioExecutivo, setCardapioExecutivo] = useState({
+    domingo_cafe: -1,
+    domingo_almoco: -1,
+    domingo_janta: -1,
+    segunda_cafe: -1,
+    segunda_almoco: -1,
+    segunda_janta: -1,
+    terca_cafe: -1,
+    terca_almoco: -1,
+    terca_janta: -1,
+    quarta_cafe: -1,
+    quarta_almoco: -1,
+    quarta_janta: -1,
+    quinta_cafe: -1,
+    quinta_almoco: -1,
+    quinta_janta: -1,
+    sexta_cafe: -1,
+    sexta_almoco: -1,
+    sexta_janta: -1,
+    sabado_cafe: -1,
+    sabado_almoco: -1,
+    sabado_janta: -1,
+    updated_at: 0,
+  });
+
   const restaurantOptions = [
     { value: 0, text: "REFEITÓRIO", default: false },
     { value: 1, text: "EXECUTIVO", default: false },
   ];
+
+  const handleUpdate = async () => {
+    setLoading(true);
+
+    await updateCardapio(selectedRestaurant, {
+      domingo_cafe: domingoCafe,
+      domingo_almoco: domingoAlmoco,
+      domingo_janta: domingoJanta,
+      segunda_cafe: segundaCafe,
+      segunda_almoco: segundaAlmoco,
+      segunda_janta: segundaJanta,
+      terca_cafe: tercaCafe,
+      terca_almoco: tercaAlmoco,
+      terca_janta: tercaJanta,
+      quarta_cafe: quartaCafe,
+      quarta_almoco: quartaAlmoco,
+      quarta_janta: quartaJanta,
+      quinta_cafe: quintaCafe,
+      quinta_almoco: quintaAlmoco,
+      quinta_janta: quintaJanta,
+      sexta_cafe: sextaCafe,
+      sexta_almoco: sextaAlmoco,
+      sexta_janta: sextaJanta,
+      sabado_cafe: sabadoCafe,
+      sabado_almoco: sabadoAlmoco,
+      sabado_janta: sabadoJanta,
+      updated_at: Date.now(),
+    })
+      .then((res) => {
+        if (selectedRestaurant == 0) {
+          setCardapioRefeitorio(res);
+        }
+        if (selectedRestaurant == 1) {
+          setCardapioExecutivo(res);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    setLoading(false);
+  };
 
   // Define as opções do select de refeições
   useEffect(() => {
@@ -96,13 +194,83 @@ export default function CardapioForm({ meals = [] }) {
   }, [meals, selectedRestaurant]);
 
   // carrega calendario
-  useEffect(() => {}, []);
+  useEffect(() => {
+    async function fetchCardapio() {
+      await getRefeitorio()
+        .then(async (res) => {
+          setCardapioRefeitorio(res);
+          await getExecutivo()
+            .then((r) => {
+              setCardapioExecutivo(r);
+            })
+            .catch((e) => {
+              console.error(e);
+            });
+        })
+        .catch((er) => {
+          console.error(er);
+        });
+    }
+    fetchCardapio();
+  }, []);
 
   // setta os selects corretos de acordo a mudança do restaurante
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (selectedRestaurant == 0) {
+      setSegundaCafe(cardapioRefeitorio.segunda_cafe);
+      setSegundaAlmoco(cardapioRefeitorio.segunda_almoco);
+      setSegundaJanta(cardapioRefeitorio.segunda_janta);
+      setTercaCafe(cardapioRefeitorio.terca_cafe);
+      setTercaAlmoco(cardapioRefeitorio.terca_almoco);
+      setTercaJanta(cardapioRefeitorio.terca_janta);
+      setQuartaCafe(cardapioRefeitorio.quarta_cafe);
+      setQuartaAlmoco(cardapioRefeitorio.quarta_almoco);
+      setQuartaJanta(cardapioRefeitorio.quarta_janta);
+      setQuintaCafe(cardapioRefeitorio.quinta_cafe);
+      setQuintaAlmoco(cardapioRefeitorio.quinta_almoco);
+      setQuintaJanta(cardapioRefeitorio.quinta_janta);
+      setSextaCafe(cardapioRefeitorio.sexta_cafe);
+      setSextaAlmoco(cardapioRefeitorio.sexta_almoco);
+      setSextaJanta(cardapioRefeitorio.sexta_janta);
+      setSabadoCafe(cardapioRefeitorio.sabado_cafe);
+      setSabadoAlmoco(cardapioRefeitorio.sabado_almoco);
+      setSabadoJanta(cardapioRefeitorio.sabado_janta);
+      setDomingoCafe(cardapioRefeitorio.domingo_cafe);
+      setDomingoAlmoco(cardapioRefeitorio.domingo_almoco);
+      setDomingoJanta(cardapioRefeitorio.domingo_janta);
+      setUpdatedAt(new Date(cardapioRefeitorio.updated_at).toString());
+    }
+    if (selectedRestaurant == 1) {
+      setSegundaCafe(cardapioExecutivo.segunda_cafe);
+      setSegundaAlmoco(cardapioExecutivo.segunda_almoco);
+      setSegundaJanta(cardapioExecutivo.segunda_janta);
+      setTercaCafe(cardapioExecutivo.terca_cafe);
+      setTercaAlmoco(cardapioExecutivo.terca_almoco);
+      setTercaJanta(cardapioExecutivo.terca_janta);
+      setQuartaCafe(cardapioExecutivo.quarta_cafe);
+      setQuartaAlmoco(cardapioExecutivo.quarta_almoco);
+      setQuartaJanta(cardapioExecutivo.quarta_janta);
+      setQuintaCafe(cardapioExecutivo.quinta_cafe);
+      setQuintaAlmoco(cardapioExecutivo.quinta_almoco);
+      setQuintaJanta(cardapioExecutivo.quinta_janta);
+      setSextaCafe(cardapioExecutivo.sexta_cafe);
+      setSextaAlmoco(cardapioExecutivo.sexta_almoco);
+      setSextaJanta(cardapioExecutivo.sexta_janta);
+      setSabadoCafe(cardapioExecutivo.sabado_cafe);
+      setSabadoAlmoco(cardapioExecutivo.sabado_almoco);
+      setSabadoJanta(cardapioExecutivo.sabado_janta);
+      setDomingoCafe(cardapioExecutivo.domingo_cafe);
+      setDomingoAlmoco(cardapioExecutivo.domingo_almoco);
+      setDomingoJanta(cardapioExecutivo.domingo_janta);
+      setUpdatedAt(new Date(cardapioExecutivo.updated_at).toString());
+    }
+  }, [cardapioExecutivo, cardapioRefeitorio, selectedRestaurant]);
 
   return (
     <Display
+      updatedAt={updatedAt}
+      loading={loading}
+      handleUpdate={handleUpdate}
       selectedRestaurant={selectedRestaurant}
       setSelectedRestaurant={setSelectedRestaurant}
       restaurantOptions={restaurantOptions}

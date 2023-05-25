@@ -1,10 +1,11 @@
+/* eslint eqeqeq: "off" */
 import React, { useEffect, useState } from "react";
 import Display from "./Display";
 import {
   getExecutivo,
   getRefeitorio,
   updateCardapio,
-} from "../../api/functions/cardapio";
+} from "../../../api/functions/cardapio";
 
 export default function CardapioForm({ meals = [] }) {
   const [selectedRestaurant, setSelectedRestaurant] = useState(-1);

@@ -14,7 +14,7 @@ import {
   Span,
 } from "./styles";
 import Button from "../Button";
-import DefaultMealImage from "../../assets/images/default_meal.jpg";
+import DefaultMealImage from "../../../assets/images/default_meal.jpg";
 
 export default function Display({ meal, toggled, setToggled = () => {} }) {
   const [img, setImg] = useState(DefaultMealImage);

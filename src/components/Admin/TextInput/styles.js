@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { colors } from "../../util/design";
+import { colors } from "../../../util/design";
 
-export const Select = styled.select`
+export const Input = styled.input`
   width: 90%;
   height: 1.4rem;
   padding: 0.1rem;

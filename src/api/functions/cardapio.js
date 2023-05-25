@@ -1,3 +1,4 @@
+/* eslint eqeqeq: "off" */
 import { db } from "../database-test-config";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 

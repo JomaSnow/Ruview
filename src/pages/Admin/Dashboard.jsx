@@ -7,15 +7,15 @@ import {
   ErrorMessage,
   MealsArea,
 } from "./styles";
-import Button from "../../components/Button";
-import CheckboxInput from "../../components/CheckboxInput";
-import TextInput from "../../components/TextInput";
+import Button from "../../components/Admin/Button";
+import CheckboxInput from "../../components/Admin/CheckboxInput";
+import TextInput from "../../components/Admin/TextInput";
 import { colors } from "../../util/design";
 import { ClipLoader } from "react-spinners";
-import SelectInput from "../../components/SelectInput";
-import ImageInput from "../../components/ImageInput";
-import MealCard from "../../components/MealCard";
-import CardapioForm from "../../components/CardapioForm";
+import SelectInput from "../../components/Admin/SelectInput";
+import ImageInput from "../../components/Admin/ImageInput";
+import MealCard from "../../components/Admin/MealCard";
+import CardapioForm from "../../components/Admin/CardapioForm";
 
 export default function Dashboard({
   handleLogOut = () => {},

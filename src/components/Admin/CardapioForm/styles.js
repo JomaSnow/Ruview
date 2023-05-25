@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../util/design";
+import { colors } from "../../../util/design";
 
 export const SectionTitle = styled.h2`
   margin-bottom: 0.6rem;

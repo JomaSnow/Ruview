@@ -5,9 +5,9 @@ import Navbar from "../../components/Navbar";
 export default function Display({ meals = [] }) {
   return (
     <>
-      <Navbar currentPage={0} />
+      <Navbar currentPage={2} />
       <Main>
-        <PageTitle>Pratos do dia</PageTitle>
+        <PageTitle>Cardápio</PageTitle>
       </Main>
     </>
   );

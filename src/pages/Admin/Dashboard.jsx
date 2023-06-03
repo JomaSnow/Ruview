@@ -9,7 +9,7 @@ import {
 } from "./styles";
 import Button from "../../components/Admin/Button";
 import CheckboxInput from "../../components/Admin/CheckboxInput";
-import TextInput from "../../components/Admin/TextInput";
+import TextInput from "../../components/TextInput";
 import { colors } from "../../util/design";
 import { ClipLoader } from "react-spinners";
 import SelectInput from "../../components/Admin/SelectInput";

@@ -1,6 +1,6 @@
 import React from "react";
 import { PageTitle, Main, LoginArea, Form, Row, ErrorMessage } from "./styles";
-import TextInput from "../../components/Admin/TextInput";
+import TextInput from "../../components/TextInput";
 import Button from "../../components/Admin/Button";
 import { ClipLoader } from "react-spinners";
 import { colors } from "../../util/design";

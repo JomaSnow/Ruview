@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../../util/design";
+import { colors } from "../../util/design";
 
 export const Input = styled.input`
   width: 90%;

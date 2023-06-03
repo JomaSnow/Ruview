@@ -14,7 +14,52 @@ export const HeaderBackground = styled.nav`
   width: 100%;
   height: 9rem;
   background-color: ${colors.primary};
-  z-index: 9;
+  z-index: 99;
+`;
+
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+`;
+
+export const LabelText = styled.span`
+  font-size: 1rem;
+  color: ${colors.white};
+`;
+
+export const LoginModal = styled.div`
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px 0;
+  /* margin-right: 5%; */
+  width: 320px;
+  height: 100px;
+  background-color: ${colors.shadow};
+  z-index: 1;
+  transform: ${(props) =>
+    props.$active ? "translateY(9rem)" : "translateY(0)"};
+  transition: transform 0.2s ease-out;
 `;
 
 export const NavigationArea = styled.div`

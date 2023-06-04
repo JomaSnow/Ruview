@@ -14,7 +14,7 @@ export const getRefeitorio = async () => {
     })
     .catch((e) => {
       console.error(e.code);
-      return `Ocorreu um erro. (${e.code})`;
+      throw new Error(`Ocorreu um erro. (${e.code})`);
     });
 
   return cardapio;
@@ -30,7 +30,7 @@ export const getExecutivo = async () => {
     })
     .catch((e) => {
       console.error(e.code);
-      return `Ocorreu um erro. (${e.code})`;
+      throw new Error(`Ocorreu um erro. (${e.code})`);
     });
 
   return cardapio;

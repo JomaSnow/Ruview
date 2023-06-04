@@ -37,7 +37,7 @@ export const getAllMeals = async () => {
     })
     .catch((e) => {
       console.error(e.code);
-      return `Ocorreu um erro. (${e.code})`;
+      throw new Error(`Ocorreu um erro. (${e.code})`);
     });
 
   return meals;

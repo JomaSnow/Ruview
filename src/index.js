@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import { SessionProvider } from "@inrupt/solid-ui-react";
 import "./index.css";
 import Home from "./pages/Home";
 import Sobre from "./pages/Sobre";
 import Cardapio from "./pages/Cardapio";
 import Admin from "./pages/Admin";
+import { SolidProvider } from "./hooks/SolidProvider";
 
 const router = createBrowserRouter([
   {
@@ -30,8 +30,8 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    {/* <SessionProvider> */}
+    <SolidProvider>
       <RouterProvider router={router} />
-    {/* </SessionProvider> */}
+    </SolidProvider>
   </React.StrictMode>
 );

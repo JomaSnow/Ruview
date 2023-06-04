@@ -46,6 +46,22 @@ export const LabelText = styled.span`
   color: ${colors.white};
 `;
 
+export const PodInfoText = styled.span`
+  font-size: 1rem;
+  color: ${colors.black};
+  position: fixed;
+  top: 9rem;
+  right: 5%;
+  z-index: 1;
+`;
+
+export const PodLinkText = styled(Link)`
+  font-size: 1rem;
+  color: ${colors.black};
+  z-index: 1;
+  text-decoration: underline;
+`;
+
 export const LoginModal = styled.div`
   display: flex;
   position: absolute;

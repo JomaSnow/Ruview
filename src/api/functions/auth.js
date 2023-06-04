@@ -1,3 +1,4 @@
+import { getDefaultSession, login, logout } from "@inrupt/solid-client-authn-browser";
 import { auth } from "../database-test-config";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 
@@ -31,3 +32,22 @@ export const logOut = async () => {
     return `Ocorreu um erro. (${e})`;
   }
 };
+
+export async function solidLogin(
+  setWebIdSolidUpdateContextHook = () => {},
+  podUrl
+) {
+  if (!getDefaultSession().info.isLoggedIn) {
+    await login({
+      oidcIssuer: podUrl,
+      redirectUrl: window.location.href,
+      clientName: "Ruview",
+    });
+    setWebIdSolidUpdateContextHook(getDefaultSession().info.webId);
+  }
+}
+
+export async function solidLogout() {
+  await logout();
+  window.location.reload();
+}

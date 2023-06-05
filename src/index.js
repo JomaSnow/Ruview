@@ -9,6 +9,7 @@ import Admin from "./pages/Admin";
 import { SolidProvider } from "./hooks/SolidProvider";
 import { MealsProvider } from "./hooks/MealsProvider";
 import { CardapioProvider } from "./hooks/CardapioProvider";
+import { MealsOfDayProvider } from "./hooks/MealsOfDayProvider";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,9 @@ root.render(
     <SolidProvider>
       <MealsProvider>
         <CardapioProvider>
-          <RouterProvider router={router} />
+          <MealsOfDayProvider>
+            <RouterProvider router={router} />
+          </MealsOfDayProvider>
         </CardapioProvider>
       </MealsProvider>
     </SolidProvider>

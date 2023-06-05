@@ -24,11 +24,15 @@ export function CardapioProvider({ children }) {
             setLoadingCardapio(false);
           })
           .catch((err) => {
-            setErrorOcurred(err);
+            setErrorOcurred(err.message);
+            console.error(err);
+            setLoadingCardapio(false);
           });
       })
       .catch((error) => {
-        setErrorOcurred(error);
+        setErrorOcurred(error.message);
+        console.error(error);
+        setLoadingCardapio(false);
       });
   }, []);
 

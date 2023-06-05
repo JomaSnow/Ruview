@@ -48,7 +48,7 @@ export const LabelText = styled.span`
 
 export const PodInfoText = styled.span`
   font-size: 1rem;
-  color: ${colors.black};
+  color: ${colors.shadow};
   position: fixed;
   top: 9rem;
   right: 5%;
@@ -57,7 +57,7 @@ export const PodInfoText = styled.span`
 
 export const PodLinkText = styled(Link)`
   font-size: 1rem;
-  color: ${colors.black};
+  color: ${colors.shadow};
   z-index: 1;
   text-decoration: underline;
 `;

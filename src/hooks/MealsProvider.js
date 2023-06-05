@@ -30,12 +30,12 @@ export function MealsProvider({ children }) {
       .finally(() => {
         setTimeout(() => {
         setLoadingMeals(false);
-        }, 500); // esse timeout ta aqui pq senão os objetos não carregam.
+        }, 700); // esse timeout ta aqui pq senão os objetos não carregam.
         // a impressão é que a função de getAllMeals demora pra buscar as imagens
         // mas fala que tá pronto pro async antes disso, logo retornando objetos desatualizados
         // (vazios já que a primeira leitura deles é vazia). De fato, se modifica
         // a getAllMeals para não buscar imagens, o async funciona adequadamente.
-        // Coloquei timeout de 500ms pq parece que funciona, mas isso não pode
+        // Coloquei timeout de 700ms pq parece que funciona, mas isso não pode
         // ser a solução adequada
       });
   }, []);

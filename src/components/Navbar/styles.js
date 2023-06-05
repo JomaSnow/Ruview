@@ -64,7 +64,7 @@ export const PodLinkText = styled(Link)`
 
 export const LoginModal = styled.div`
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   padding: 10px 0;

@@ -11,6 +11,7 @@ import Navbar from "../../components/Navbar";
 import { ClipLoader } from "react-spinners";
 import { colors } from "../../util/design";
 import { useMealsOfDay } from "../../hooks/MealsOfDayProvider";
+import MealOfDayCard from "../../components/MealOfDayCard";
 
 export default function Display({ today, cardapioDate, loading, hasError }) {
   const {
@@ -26,7 +27,6 @@ export default function Display({ today, cardapioDate, loading, hasError }) {
     <>
       <Navbar currentPage={0} />
       <Main>
-        {cafeRefeitorio ? cafeRefeitorio.nome : "não funfou"}
         <PageTitle>Pratos do dia</PageTitle>
         <SpanText>
           {today}. (Atualizado em {cardapioDate})
@@ -38,9 +38,15 @@ export default function Display({ today, cardapioDate, loading, hasError }) {
             <>
               <RestaurantArea>
                 <SectionTitle>Refeitório</SectionTitle>
+                <MealOfDayCard meal={cafeRefeitorio} type="cafe" />
+                <MealOfDayCard meal={almocoRefeitorio} type="almoco" />
+                <MealOfDayCard meal={jantaRefeitorio} type="janta" />
               </RestaurantArea>
               <RestaurantArea>
                 <SectionTitle>Executivo</SectionTitle>
+                <MealOfDayCard meal={cafeExecutivo} type="cafe" />
+                <MealOfDayCard meal={almocoExecutivo} type="almoco" />
+                <MealOfDayCard meal={jantaExecutivo} type="janta" />
               </RestaurantArea>
             </>
           ) : (

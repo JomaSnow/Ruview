@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@inrupt/solid-client": "^1.29.0",
     "@inrupt/solid-client-authn-browser": "^1.16.0",
     "@inrupt/solid-ui-react": "^2.8.2",

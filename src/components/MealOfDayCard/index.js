@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from "react";
 import Display from "./Display";
+import {
+  addLikedMeal,
+  getLikedMeals,
+  // undoLike,
+  // undoDislike,
+  addDislikedMeal,
+  getDislikedMeals,
+} from "../../api/functions/solid";
 
 export default function MealOfDayCard({ meal, type = "cafe" }) {
   const [typeText, setTypeText] = useState("");
   const [attributesText, setAttributesText] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     switch (type) {
       case "cafe":
-        setTypeText("Café da manhã (6am-10am)");
+        setTypeText("Café da manhã (07:00 às 09:30)");
         break;
       case "almoco":
-        setTypeText("Almoço (11am-3pm)");
+        setTypeText("Almoço (11:00 às 14:30)");
         break;
       case "janta":
-        setTypeText("Janta (6pm-10pm)");
+        setTypeText("Janta (17:00 às 19:30)");
         break;
 
       default:
@@ -78,7 +87,54 @@ export default function MealOfDayCard({ meal, type = "cafe" }) {
     };
   }, [meal]);
 
+  async function handleLikeMeal() {
+    setLoading(true);
+
+    await addLikedMeal(meal);
+    const mArray = await getLikedMeals();
+    console.log(mArray);
+
+    setLoading(false);
+  }
+
+  // async function handleUndoLike() {
+  //   setLoading(true);
+
+  //   await undoLike(meal);
+  //   const mArray = await getLikedMeals();
+  //   console.log(mArray);
+
+  //   setLoading(false);
+  // }
+
+  async function handleDislikeMeal() {
+    setLoading(true);
+
+    await addDislikedMeal(meal);
+    const mArray = await getDislikedMeals();
+    console.log(mArray);
+
+    setLoading(false);
+  }
+
+  // async function handleUndoDislike() {
+  //   setLoading(true);
+
+  //   await undoDislike(meal);
+  //   const mArray = await getDislikedMeals();
+  //   console.log(mArray);
+
+  //   setLoading(false);
+  // }
+
   return !meal ? null : (
-    <Display meal={meal} type={typeText} attributes={attributesText} />
+    <Display
+      meal={meal}
+      type={typeText}
+      attributes={attributesText}
+      handleLikeMeal={handleLikeMeal}
+      handleDislikeMeal={handleDislikeMeal}
+      loading={loading}
+    />
   );
 }

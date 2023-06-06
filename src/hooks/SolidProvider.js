@@ -29,6 +29,7 @@ export function SolidProvider({ children }) {
     updateWebId();
   }, [webId]);
 
+  // modificar value pra trazer também a lista de pratos que user gosta (ou criar novo provider que traz a lista dele e dos amigos logo)
   return (
     <SolidContext.Provider value={webId}>
       <SolidUpdateContext.Provider value={setWebId}>

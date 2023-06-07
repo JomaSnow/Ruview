@@ -1,18 +1,39 @@
 import React, { useEffect, useState } from "react";
 import Display from "./Display";
-import {
-  addLikedMeal,
-  getLikedMeals,
-  // undoLike,
-  // undoDislike,
-  addDislikedMeal,
-  getDislikedMeals,
-} from "../../api/functions/solid";
+import { usePodMeals, usePodMealsUpdate } from "../../hooks/PodMealsProvider";
 
 export default function MealOfDayCard({ meal, type = "cafe" }) {
   const [typeText, setTypeText] = useState("");
   const [attributesText, setAttributesText] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [hasLiked, setHasLiked] = useState(false);
+  const [hasDisliked, setHasDisliked] = useState(false);
+
+  const { likedMeals, dislikedMeals, loadingMeals } = usePodMeals();
+  const { addLiked, addDisliked, undoLiked, undoDisliked } =
+    usePodMealsUpdate();
+
+  useEffect(() => {
+    if (!loadingMeals) {
+      setLoading(false);
+    }
+  }, [loadingMeals]);
+
+  useEffect(() => {
+    if (likedMeals.some((m) => m.id === meal.id)) {
+      setHasLiked(true);
+    } else {
+      setHasLiked(false);
+    }
+  }, [likedMeals, meal]);
+
+  useEffect(() => {
+    if (dislikedMeals.some((m) => m.id === meal.id)) {
+      setHasDisliked(true);
+    } else {
+      setHasDisliked(false);
+    }
+  }, [dislikedMeals, meal]);
 
   useEffect(() => {
     switch (type) {
@@ -89,43 +110,27 @@ export default function MealOfDayCard({ meal, type = "cafe" }) {
 
   async function handleLikeMeal() {
     setLoading(true);
-
-    await addLikedMeal(meal);
-    const mArray = await getLikedMeals();
-    console.log(mArray);
-
+    await addLiked(meal);
     setLoading(false);
   }
 
-  // async function handleUndoLike() {
-  //   setLoading(true);
-
-  //   await undoLike(meal);
-  //   const mArray = await getLikedMeals();
-  //   console.log(mArray);
-
-  //   setLoading(false);
-  // }
+  async function handleUndoLike() {
+    setLoading(true);
+    await undoLiked(meal);
+    setLoading(false);
+  }
 
   async function handleDislikeMeal() {
     setLoading(true);
-
-    await addDislikedMeal(meal);
-    const mArray = await getDislikedMeals();
-    console.log(mArray);
-
+    await addDisliked(meal);
     setLoading(false);
   }
 
-  // async function handleUndoDislike() {
-  //   setLoading(true);
-
-  //   await undoDislike(meal);
-  //   const mArray = await getDislikedMeals();
-  //   console.log(mArray);
-
-  //   setLoading(false);
-  // }
+  async function handleUndoDislike() {
+    setLoading(true);
+    undoDisliked(meal);
+    setLoading(false);
+  }
 
   return !meal ? null : (
     <Display
@@ -134,7 +139,11 @@ export default function MealOfDayCard({ meal, type = "cafe" }) {
       attributes={attributesText}
       handleLikeMeal={handleLikeMeal}
       handleDislikeMeal={handleDislikeMeal}
+      handleUndoLike={handleUndoLike}
+      handleUndoDislike={handleUndoDislike}
       loading={loading}
+      hasLiked={hasLiked}
+      hasDisliked={hasDisliked}
     />
   );
 }

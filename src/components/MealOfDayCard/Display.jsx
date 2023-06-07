@@ -6,6 +6,7 @@ import {
   CardArea,
   CardInfoText,
   CardTitle,
+  Column,
   FriendsArea,
   Image,
   ImageArea,
@@ -25,7 +26,11 @@ export default function Display({
   attributes,
   handleLikeMeal,
   handleDislikeMeal,
+  handleUndoLike,
+  handleUndoDislike,
   loading,
+  hasLiked,
+  hasDisliked,
 }) {
   const webId = useSolid();
 
@@ -49,6 +54,38 @@ export default function Display({
                 <ButtonsLoaderWrapper>
                   <ClipLoader color={colors.accent} />
                 </ButtonsLoaderWrapper>
+              ) : hasLiked ? (
+                <Column>
+                  <CardInfoText style={{ fontSize: "0.7rem" }} $center>
+                    Você gosta desse prato.
+                  </CardInfoText>
+                  <CardInfoText
+                    $center
+                    $link
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleUndoLike();
+                    }}
+                  >
+                    Mudou de ideia?
+                  </CardInfoText>
+                </Column>
+              ) : hasDisliked ? (
+                <Column>
+                  <CardInfoText style={{ fontSize: "0.7rem" }} $center>
+                    Você não gosta desse prato.
+                  </CardInfoText>
+                  <CardInfoText
+                    $center
+                    $link
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleUndoDislike();
+                    }}
+                  >
+                    Mudou de ideia?
+                  </CardInfoText>
+                </Column>
               ) : (
                 <>
                   <Button

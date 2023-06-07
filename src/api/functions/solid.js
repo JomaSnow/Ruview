@@ -1,6 +1,17 @@
 /* eslint eqeqeq: "off" */
-import { getPodUrlAll, overwriteFile, getFile } from "@inrupt/solid-client";
+import {
+  getPodUrlAll,
+  overwriteFile,
+  getFile,
+  getSolidDataset,
+  getThing,
+  getUrlAll,
+  buildThing,
+  setThing,
+  saveSolidDatasetAt,
+} from "@inrupt/solid-client";
 import { fetch, getDefaultSession } from "@inrupt/solid-client-authn-browser";
+import { FOAF } from "@inrupt/vocab-common-rdf";
 
 export async function getLikedMeals() {
   const webId = getDefaultSession().info.webId;
@@ -157,5 +168,29 @@ export async function undoDislike(meal) {
     } else {
       console.error(e);
     }
+  }
+}
+
+export async function addFriend(friendWebID) {
+  const webId = getDefaultSession().info.webId;
+  let dataSet = await getSolidDataset(webId, { fetch: fetch }); // dataset card
+
+  let thing = getThing(dataSet, webId); // :me thing ()
+
+  try {
+    let currentFriendsUrl = getUrlAll(thing, FOAF.knows);
+    if (currentFriendsUrl.some((url) => url === friendWebID)) {
+      return "Vocês já são amigos";
+    } else {
+      // Friend as thing
+      let newFriend = buildThing(thing).addUrl(FOAF.knows, friendWebID).build();
+
+      // insert friend in dataset
+      dataSet = setThing(dataSet, newFriend);
+      dataSet = await saveSolidDatasetAt(webId, dataSet, { fetch: fetch });
+      return null;
+    }
+  } catch (error) {
+    return "Ocorreu um erro";
   }
 }

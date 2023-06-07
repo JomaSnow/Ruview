@@ -38,12 +38,12 @@ export const InfosArea = styled.div`
 
 export const ImageArea = styled.div`
   display: flex;
-  flex: 9;
+  flex: 10;
 `;
 
 export const ButtonsArea = styled.div`
   display: flex;
-  flex: 7;
+  flex: 8;
   padding-right: 1.4rem;
   height: 100%;
   flex-direction: row;
@@ -71,9 +71,20 @@ export const CardTitle = styled.h4`
   font-weight: 700;
 `;
 
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
 export const CardInfoText = styled.span`
   font-size: 0.9rem;
-  color: ${colors.shadow};
+  color: ${(props) => (props.$link ? colors.accent : colors.shadow)};
+  text-decoration: ${(props) => (props.$link ? "underline" : "none")};
+  cursor: ${(props) => (props.$link ? "pointer" : "default")};
   font-weight: 700;
   text-align: ${(props) => (props.$center ? "center" : "left")};
 `;

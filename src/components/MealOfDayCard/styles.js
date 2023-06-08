@@ -62,7 +62,11 @@ export const ButtonsLoaderWrapper = styled.div`
 export const FriendsArea = styled.div`
   display: flex;
   flex: 16;
-  height: 100%;
+  max-height: 100px;
+  padding: 1.5rem 0 1rem 1.25rem;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto;
 `;
 
 export const CardTitle = styled.h4`

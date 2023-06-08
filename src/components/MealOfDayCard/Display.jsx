@@ -19,6 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 import { colors } from "../../util/design";
 import { ClipLoader } from "react-spinners";
+import { usePodFriends } from "../../hooks/PodFriendsProvider";
 
 export default function Display({
   meal,
@@ -31,8 +32,12 @@ export default function Display({
   loading,
   hasLiked,
   hasDisliked,
+  friendsWhoLiked = [],
+  friendsWhoDisliked = [],
 }) {
   const webId = useSolid();
+
+  const { loadingFriends } = usePodFriends();
 
   return (
     <CardArea>
@@ -116,7 +121,28 @@ export default function Display({
                 </>
               )}
             </ButtonsArea>
-            <FriendsArea></FriendsArea>
+            <FriendsArea>
+              {loadingFriends ? (
+                <Column>
+                  <ClipLoader color={colors.accent} />
+                </Column>
+              ) : friendsWhoLiked.length === 0 &&
+                friendsWhoDisliked.length === 0 ? (
+                <CardInfoText>Nenhum amigo avaliou este prato.</CardInfoText>
+              ) : (
+                <>
+                  {console.log(friendsWhoLiked)}
+                  {friendsWhoLiked.forEach((f) => {
+                    return <CardInfoText>{f} gosta deste prato.</CardInfoText>;
+                  })}
+                  {friendsWhoDisliked.forEach((f) => {
+                    return (
+                      <CardInfoText>{f} não gosta deste prato.</CardInfoText>
+                    );
+                  })}
+                </>
+              )}
+            </FriendsArea>
           </>
         ) : (
           <CardInfoText $center>

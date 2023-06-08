@@ -11,6 +11,7 @@ import { MealsProvider } from "./hooks/MealsProvider";
 import { CardapioProvider } from "./hooks/CardapioProvider";
 import { MealsOfDayProvider } from "./hooks/MealsOfDayProvider";
 import { PodMealsProvider } from "./hooks/PodMealsProvider";
+import { PodFriendsProvider } from "./hooks/PodFriendsProvider";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,9 @@ root.render(
         <CardapioProvider>
           <PodMealsProvider>
             <MealsOfDayProvider>
-              <RouterProvider router={router} />
+              <PodFriendsProvider>
+                <RouterProvider router={router} />
+              </PodFriendsProvider>
             </MealsOfDayProvider>
           </PodMealsProvider>
         </CardapioProvider>

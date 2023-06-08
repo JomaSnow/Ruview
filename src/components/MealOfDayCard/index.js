@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Display from "./Display";
 import { usePodMeals, usePodMealsUpdate } from "../../hooks/PodMealsProvider";
+import { usePodFriends } from "../../hooks/PodFriendsProvider";
 
 export default function MealOfDayCard({ meal, type = "cafe" }) {
   const [typeText, setTypeText] = useState("");
@@ -9,9 +10,27 @@ export default function MealOfDayCard({ meal, type = "cafe" }) {
   const [hasLiked, setHasLiked] = useState(false);
   const [hasDisliked, setHasDisliked] = useState(false);
 
+  const [friendsWhoLiked, setFriendsWhoLiked] = useState([]);
+  const [friendsWhoDisliked, setFriendsWhoDisliked] = useState([]);
+
   const { likedMeals, dislikedMeals, loadingMeals } = usePodMeals();
   const { addLiked, addDisliked, undoLiked, undoDisliked } =
     usePodMealsUpdate();
+
+  const { friends, loadingFriends } = usePodFriends();
+
+  useEffect(() => {
+    if (!loadingFriends && friends.length > 0) {
+      friends.forEach((f) => {
+        if (f.likedMeals.some((m) => m.id === meal.id)) {
+          setFriendsWhoLiked((prevFriends) => [...prevFriends, f.nome]);
+        }
+        if (f.dislikedMeals.some((m) => m.id === meal.id)) {
+          setFriendsWhoDisliked((prevFriends) => [...prevFriends, f.nome]);
+        }
+      });
+    }
+  }, [friends, loadingFriends, meal]);
 
   useEffect(() => {
     if (!loadingMeals) {
@@ -144,6 +163,8 @@ export default function MealOfDayCard({ meal, type = "cafe" }) {
       loading={loading}
       hasLiked={hasLiked}
       hasDisliked={hasDisliked}
+      friendsWhoLiked={friendsWhoLiked}
+      friendsWhoDisliked={friendsWhoDisliked}
     />
   );
 }

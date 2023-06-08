@@ -58,7 +58,6 @@ export function PodMealsProvider({ children }) {
   }, [webId]);
 
   async function addLiked(meal) {
-    setLoadingMeals(true);
     try {
       await addLikedMeal(meal);
 
@@ -70,11 +69,9 @@ export function PodMealsProvider({ children }) {
 
       console.error(error);
     }
-    setLoadingMeals(false);
   }
 
   async function addDisliked(meal) {
-    setLoadingMeals(true);
     try {
       await addDislikedMeal(meal);
 
@@ -86,11 +83,9 @@ export function PodMealsProvider({ children }) {
 
       console.error(error);
     }
-    setLoadingMeals(false);
   }
 
   async function undoDisliked(meal) {
-    setLoadingMeals(true);
     try {
       await undoDislike(meal);
 
@@ -102,11 +97,9 @@ export function PodMealsProvider({ children }) {
 
       console.error(error);
     }
-    setLoadingMeals(false);
   }
 
   async function undoLiked(meal) {
-    setLoadingMeals(true);
     try {
       await undoLike(meal);
 
@@ -118,7 +111,6 @@ export function PodMealsProvider({ children }) {
 
       console.error(error);
     }
-    setLoadingMeals(false);
   }
 
   return (

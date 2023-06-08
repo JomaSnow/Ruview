@@ -20,13 +20,13 @@ export default function MealOfDayCard({ meal, type = "cafe" }) {
   const { friends, loadingFriends } = usePodFriends();
 
   useEffect(() => {
-    if (!loadingFriends && friends.length > 0) {
+    if (!loadingFriends) {
       friends.forEach((f) => {
         if (f.likedMeals.some((m) => m.id === meal.id)) {
-          setFriendsWhoLiked((prevFriends) => [...prevFriends, f.nome]);
+          setFriendsWhoLiked((prevFriends) => [...prevFriends, f]);
         }
         if (f.dislikedMeals.some((m) => m.id === meal.id)) {
-          setFriendsWhoDisliked((prevFriends) => [...prevFriends, f.nome]);
+          setFriendsWhoDisliked((prevFriends) => [...prevFriends, f]);
         }
       });
     }

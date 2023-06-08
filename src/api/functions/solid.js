@@ -203,7 +203,7 @@ export async function getSolidFriends() {
   try {
     const currentFriendsUrl = getUrlAll(thing, FOAF.knows);
 
-    currentFriendsUrl.forEach(async (url) => {
+    for (const url of currentFriendsUrl) {
       const friendDataSet = await getSolidDataset(url, { fetch: fetch });
 
       const friendThing = getThing(friendDataSet, url);
@@ -216,12 +216,12 @@ export async function getSolidFriends() {
       const friendObj = { nome, friendWebId, likedMeals, dislikedMeals };
 
       friendsObjArr.push(friendObj);
-    });
+    }
 
     return friendsObjArr;
   } catch (error) {
     console.error(error);
-    return new Error("Ocorreu um erro");
+    throw new Error("Ocorreu um erro");
   }
 }
 

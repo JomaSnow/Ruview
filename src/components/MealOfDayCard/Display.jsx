@@ -131,13 +131,18 @@ export default function Display({
                 <CardInfoText>Nenhum amigo avaliou este prato.</CardInfoText>
               ) : (
                 <>
-                  {console.log(friendsWhoLiked)}
-                  {friendsWhoLiked.forEach((f) => {
-                    return <CardInfoText>{f} gosta deste prato.</CardInfoText>;
-                  })}
-                  {friendsWhoDisliked.forEach((f) => {
+                  {friendsWhoLiked.map((f) => {
                     return (
-                      <CardInfoText>{f} não gosta deste prato.</CardInfoText>
+                      <CardInfoText key={f.nome + meal.id}>
+                        {f.nome} gosta deste prato.
+                      </CardInfoText>
+                    );
+                  })}
+                  {friendsWhoDisliked.map((f) => {
+                    return (
+                      <CardInfoText key={f.nome + meal.id}>
+                        {f.nome} não gosta deste prato.
+                      </CardInfoText>
                     );
                   })}
                 </>

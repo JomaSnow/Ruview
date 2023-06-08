@@ -26,17 +26,18 @@ export function PodFriendsProvider({ children }) {
 
   useEffect(() => {
     if (webId) {
-      setLoadingFriends(true);
-      getSolidFriends()
-        .then((res) => {
-          setFriends(res);
-        })
-        .catch((e) => {
+      (async () => {
+        setLoadingFriends(true);
+        try {
+          const fetchedFriendsArr = await getSolidFriends();
+          console.log(fetchedFriendsArr);
+          setFriends(fetchedFriendsArr);
+        } catch (e) {
           setErrorOcurred(e);
-        })
-        .finally(() => {
+        } finally {
           setLoadingFriends(false);
-        });
+        }
+      })();
     }
   }, [webId]);
 

@@ -17,7 +17,11 @@ export default function Navbar({ currentPage = 0 }) {
 
   async function handleLogIn() {
     setLoading(true);
-    await solidLogin(setWebId, podUrl);
+    try {
+      await solidLogin(setWebId, podUrl);
+    } catch (e) {
+      alert(e);
+    }
     setLoading(false);
   }
 

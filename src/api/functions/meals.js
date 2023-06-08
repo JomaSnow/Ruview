@@ -21,17 +21,17 @@ export const getAllMeals = async () => {
     .then((res) => {
       res.docs.map(async (doc) => {
         let meal = doc.data();
-        let image = undefined;
-        await getDownloadURL(ref(storage, MEALS_PATH + `/${doc.id}`))
-          .then((result) => {
-            image = result;
-          })
-          .catch((err) => {
-            console.error(err.code);
-          });
+        // let image = undefined;
+        // await getDownloadURL(ref(storage, MEALS_PATH + `/${doc.id}`))
+        //   .then((result) => {
+        //     image = result;
+        //   })
+        //   .catch((err) => {
+        //     console.error(err.code);
+        //   });
 
-        meal = { ...meal, id: doc.id, image };
-        // meal = { ...meal, id: doc.id };
+        // meal = { ...meal, id: doc.id, image };
+        meal = { ...meal, id: doc.id };
         return meals.push(meal);
       });
     })

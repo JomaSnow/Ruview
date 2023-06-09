@@ -29,9 +29,15 @@ export const ProfileCard = styled.div`
 export const FriendsArea = styled.div`
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   flex: 1;
   padding: 0 2% 0 5%;
+`;
+
+export const FriendsCardsArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 1;
 `;
 
 export const FriendProfileCard = styled.div`

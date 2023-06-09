@@ -4,6 +4,7 @@ import {
   FriendCardInfoArea,
   FriendProfileCard,
   FriendsArea,
+  FriendsCardsArea,
   InputArea,
   Main,
   PageTitle,
@@ -64,38 +65,40 @@ export default function Display({
                   }}
                 />
               </InputArea>
-              {friends.map((f) => {
-                return (
-                  <>
-                    <FriendProfileCard
-                      key={f.nome}
-                      to={f.friendWebId}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FriendCardInfoArea>
-                        <ProfileInfo>{f.nome}</ProfileInfo>
-                      </FriendCardInfoArea>
-                      <FriendCardActionsArea>
-                        <MainButton
-                          text="Excluir"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleRemoveFriend(f.friendWebId);
-                          }}
-                        />
-                        <Link
-                          to={f.friendWebId}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Visitar POD
-                        </Link>
-                      </FriendCardActionsArea>
-                    </FriendProfileCard>
-                  </>
-                );
-              })}
+              <FriendsCardsArea>
+                {friends.map((f) => {
+                  return (
+                    <>
+                      <FriendProfileCard
+                        key={f.nome}
+                        to={f.friendWebId}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FriendCardInfoArea>
+                          <ProfileInfo>{f.nome}</ProfileInfo>
+                        </FriendCardInfoArea>
+                        <FriendCardActionsArea>
+                          <MainButton
+                            text="Excluir"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleRemoveFriend(f.friendWebId);
+                            }}
+                          />
+                          <Link
+                            to={f.friendWebId}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Visitar POD
+                          </Link>
+                        </FriendCardActionsArea>
+                      </FriendProfileCard>
+                    </>
+                  );
+                })}
+              </FriendsCardsArea>
             </>
           )}
         </FriendsArea>

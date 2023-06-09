@@ -26,7 +26,7 @@ export function PodMealsProvider({ children }) {
   const [loadingMeals, setLoadingMeals] = useState(false);
   const [errorOcurred, setErrorOcurred] = useState(null);
 
-  const webId = useSolid();
+  const { webId } = useSolid();
 
   useEffect(() => {
     if (webId) {

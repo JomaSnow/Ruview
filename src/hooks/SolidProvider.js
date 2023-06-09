@@ -3,6 +3,7 @@ import {
   handleIncomingRedirect,
 } from "@inrupt/solid-client-authn-browser";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { getUserProfile } from "../api/functions/solid";
 
 const SolidContext = createContext();
 const SolidUpdateContext = createContext();
@@ -16,8 +17,11 @@ export function useSolidUpdate() {
 }
 
 export function SolidProvider({ children }) {
-  const [webId, setWebId] = useState();
+  const [webId, setWebId] = useState(null);
+  const [userProfile, setUserProfile] = useState();
+  const [loadingProfile, setLoadingProfile] = useState(false);
 
+  // setta webId
   useEffect(() => {
     async function updateWebId() {
       await handleIncomingRedirect({ restorePreviousSession: true });
@@ -29,10 +33,20 @@ export function SolidProvider({ children }) {
     updateWebId();
   }, [webId]);
 
-  // modificar value pra trazer também a lista de pratos que user gosta (ou criar novo provider que traz a lista dele e dos amigos logo)
+  // setta profile
+  useEffect(() => {
+    if (webId) {
+      setLoadingProfile(true);
+      getUserProfile().then((res) => {
+        setUserProfile(res);
+      });
+      setLoadingProfile(false);
+    }
+  }, [webId]);
+
   return (
-    <SolidContext.Provider value={webId}>
-      <SolidUpdateContext.Provider value={setWebId}>
+    <SolidContext.Provider value={{ webId, userProfile, loadingProfile }}>
+      <SolidUpdateContext.Provider value={{ setWebId }}>
         {children}
       </SolidUpdateContext.Provider>
     </SolidContext.Provider>

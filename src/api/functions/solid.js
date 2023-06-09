@@ -12,7 +12,7 @@ import {
   getLiteral,
 } from "@inrupt/solid-client";
 import { fetch, getDefaultSession } from "@inrupt/solid-client-authn-browser";
-import { FOAF } from "@inrupt/vocab-common-rdf";
+import { FOAF, VCARD } from "@inrupt/vocab-common-rdf";
 
 export async function getLikedMeals(webId) {
   let id = webId;
@@ -274,5 +274,24 @@ export async function removeSolidFriend(friendWebID) {
   } catch (error) {
     console.error(error);
     return "Ocorreu um erro";
+  }
+}
+
+export async function getUserProfile() {
+  const webId = getDefaultSession().info.webId;
+  const dataSet = await getSolidDataset(webId, { fetch: fetch }); // dataset card
+
+  const thing = getThing(dataSet, webId); // :me thing ()
+
+  let profile = {};
+
+  try {
+    const userFirstName = getLiteral(thing, VCARD.fn);
+
+    profile = { firstName: userFirstName.value };
+    return profile;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Ocorreu um erro");
   }
 }

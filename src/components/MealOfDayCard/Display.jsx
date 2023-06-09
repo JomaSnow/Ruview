@@ -35,7 +35,7 @@ export default function Display({
   friendsWhoLiked = [],
   friendsWhoDisliked = [],
 }) {
-  const webId = useSolid();
+  const { webId } = useSolid();
 
   const { loadingFriends } = usePodFriends();
 

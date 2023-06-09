@@ -30,7 +30,7 @@ export default function Display({
   handleLogIn = () => {},
   handleLogOut = () => {},
 }) {
-  const webId = useSolid();
+  const { webId } = useSolid();
 
   return (
     <>

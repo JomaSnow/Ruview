@@ -22,7 +22,7 @@ export function PodFriendsProvider({ children }) {
   const [loadingFriends, setLoadingFriends] = useState(false);
   const [errorOcurred, setErrorOcurred] = useState(null);
 
-  const webId = useSolid();
+  const { webId } = useSolid();
 
   useEffect(() => {
     if (webId) {
@@ -30,7 +30,6 @@ export function PodFriendsProvider({ children }) {
         setLoadingFriends(true);
         try {
           const fetchedFriendsArr = await getSolidFriends();
-          console.log(fetchedFriendsArr);
           setFriends(fetchedFriendsArr);
         } catch (e) {
           setErrorOcurred(e);

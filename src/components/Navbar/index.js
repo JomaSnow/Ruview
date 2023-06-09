@@ -9,7 +9,7 @@ export default function Navbar({ currentPage = 0 }) {
   const [loading, setLoading] = useState(false);
   const [podUrl, setPodUrl] = useState("");
   const modalRef = useRef(null);
-  const setWebId = useSolidUpdate();
+  const { setWebId } = useSolidUpdate();
 
   function handleModalToggle() {
     setModalToggle(!modalToggle);

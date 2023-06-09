@@ -147,7 +147,7 @@ export default function MealOfDayCard({ meal, type = "cafe" }) {
 
   async function handleUndoDislike() {
     setLoading(true);
-    undoDisliked(meal);
+    await undoDisliked(meal);
     setLoading(false);
   }
 

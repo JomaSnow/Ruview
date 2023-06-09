@@ -12,6 +12,7 @@ import { ClipLoader } from "react-spinners";
 import { colors } from "../../util/design";
 import { useMealsOfDay } from "../../hooks/MealsOfDayProvider";
 import MealOfDayCard from "../../components/MealOfDayCard";
+import Footer from "../../components/Footer";
 
 export default function Display({ today, cardapioDate, loading, hasError }) {
   const {
@@ -54,6 +55,7 @@ export default function Display({ today, cardapioDate, loading, hasError }) {
           )}
         </MealsSection>
       </Main>
+      <Footer />
     </>
   );
 }

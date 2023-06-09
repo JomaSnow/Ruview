@@ -40,6 +40,11 @@ export default function AdminPage() {
     { value: 1, text: "EXECUTIVO", default: false },
   ];
 
+  // muda nome da página
+  useEffect(() => {
+    document.title = "Ruview | Admin";
+  }, []);
+
   useEffect(() => {
     getAllMeals().then((response) => {
       setMeals(response);

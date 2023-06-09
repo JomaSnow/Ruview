@@ -12,6 +12,11 @@ export default function HomePage() {
   const cardapios = useCardapio();
   const meals = useMeals();
 
+  // muda nome da página
+  useEffect(() => {
+    document.title = "Ruview | Home";
+  }, []);
+
   // define o dia atual e formata última atualização do cardápio
   useEffect(() => {
     const dayOfWeek = new Date().getDay();

@@ -6,6 +6,7 @@ import {
   RestaurantArea,
   SectionTitle,
   SpanText,
+  TextLink,
 } from "./styles";
 import Navbar from "../../components/Navbar";
 import { ClipLoader } from "react-spinners";
@@ -54,6 +55,9 @@ export default function Display({ today, cardapioDate, loading, hasError }) {
             <SpanText style={{ color: colors.accent }}>{hasError}.</SpanText>
           )}
         </MealsSection>
+        <TextLink to={"/cardapio"}>
+          Acesse o cardápio completo da semana.
+        </TextLink>
       </Main>
       <Footer />
     </>

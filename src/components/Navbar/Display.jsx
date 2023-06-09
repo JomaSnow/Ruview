@@ -49,11 +49,7 @@ export default function Display({
           {!webId ? (
             <HeaderLink onClick={handleModalToggle}>Login</HeaderLink>
           ) : (
-            <HeaderLink
-              onClick={() => {
-                console.log("goto perfil");
-              }}
-            >
+            <HeaderLink to={"/perfil"} $selected={currentPage == 3}>
               Perfil
             </HeaderLink>
           )}

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../util/design";
+import { Link } from "react-router-dom";
 
 export const PageTitle = styled.h2`
   font-size: 2.5rem;
@@ -27,6 +28,13 @@ export const Main = styled.main`
 export const SpanText = styled.span`
   font-size: 1.5rem;
   color: ${colors.shadow};
+`;
+
+export const TextLink = styled(Link)`
+  font-size: 1.5rem;
+  color: ${colors.accent};
+  text-decoration: underline;
+  align-self: center;
 `;
 
 export const MealsSection = styled.section`

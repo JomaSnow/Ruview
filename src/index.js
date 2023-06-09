@@ -12,6 +12,7 @@ import { CardapioProvider } from "./hooks/CardapioProvider";
 import { MealsOfDayProvider } from "./hooks/MealsOfDayProvider";
 import { PodMealsProvider } from "./hooks/PodMealsProvider";
 import { PodFriendsProvider } from "./hooks/PodFriendsProvider";
+import PerfilPage from "./pages/Perfil";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <Admin />,
+  },
+  {
+    path: "/perfil",
+    element: <PerfilPage />,
   },
 ]);
 

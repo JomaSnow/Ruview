@@ -6,9 +6,9 @@ import Footer from "../../components/Footer";
 export default function Display() {
   return (
     <>
-      <Navbar currentPage={2} />
+      <Navbar currentPage={3} />
       <Main>
-        <PageTitle>Cardápio</PageTitle>
+        <PageTitle>Perfil</PageTitle>
       </Main>
       <Footer />
     </>
